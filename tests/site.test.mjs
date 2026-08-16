@@ -15,7 +15,7 @@ test("build resolves every deployment placeholder", () => {
 test("page contains both public service destinations", () => {
   assert.match(html, /XMind 转测试用例/);
   assert.match(html, />Kairo</);
-  assert.match(html, /https:\/\/120\.26\.115\.87\//);
+  assert.match(html, /https:\/\/120\.26\.115\.87:18443\//);
   assert.match(html, /https:\/\/120\.26\.115\.87:18380\//);
 });
 

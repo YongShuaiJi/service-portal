@@ -14,7 +14,8 @@ for file in \
     deploy-service-portal \
     service-portal-deploy-entrypoint \
     service-portal-deploy.sudoers \
-    nginx-service-portal.conf; do
+    nginx-service-portal.conf \
+    nginx-xmind-temporary-port.conf; do
     [[ -f "$source_dir/$file" ]] || {
         printf 'Missing installation input: %s\n' "$file" >&2
         exit 1
@@ -38,6 +39,9 @@ install -o root -g root -m 0440 \
 install -o root -g root -m 0644 \
     "$source_dir/nginx-service-portal.conf" \
     /etc/nginx/conf.d/service-portal.conf
+install -o root -g root -m 0644 \
+    "$source_dir/nginx-xmind-temporary-port.conf" \
+    /etc/nginx/conf.d/xmind-converter.conf
 
 visudo -cf /etc/sudoers.d/service-portal-deploy
 
