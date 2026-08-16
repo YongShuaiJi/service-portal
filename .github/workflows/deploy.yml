@@ -35,9 +35,9 @@ jobs:
 
       - name: Build deployment artifact
         env:
-          PORTAL_URL: https://${{ vars.ECS_HOST }}:18443/
-          XMIND_URL: https://${{ vars.ECS_HOST }}/
-          KAIRO_URL: https://${{ vars.ECS_HOST }}:18380/
+          PORTAL_URL: ${{ vars.PORTAL_URL }}
+          XMIND_URL: ${{ vars.XMIND_URL }}
+          KAIRO_URL: ${{ vars.KAIRO_URL }}
         run: npm run build
 
       - name: Upload verified portal
@@ -60,7 +60,7 @@ jobs:
       cancel-in-progress: false
     environment:
       name: prod
-      url: https://${{ vars.ECS_HOST }}:18443/
+      url: ${{ vars.PORTAL_URL }}
     steps:
       - name: Download verified portal
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
@@ -102,7 +102,7 @@ jobs:
 
       - name: Verify public HTTPS portal
         env:
-          PORTAL_URL: https://${{ vars.ECS_HOST }}:18443/
+          PORTAL_URL: ${{ vars.PORTAL_URL }}
         run: |
           set -Eeuo pipefail
           curl \
