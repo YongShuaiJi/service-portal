@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+readonly SITE_ROOT="/var/www/service-portal"
+readonly RELEASES_DIR="$SITE_ROOT/releases"
+readonly CURRENT_LINK="$SITE_ROOT/current"
+readonly LOCK_FILE="/run/lock/service-portal-deploy.lock"
+
+archive=""
+stage=""
+
+log() {
+    printf '[portal-deploy] %s\n' "$*"
+}
+
+fail() {
+    log "ERROR: $*" >&2
+    exit 1
+}
+
+cleanup() {
+    [[ -z "$archive" || ! -e "$archive" ]] || rm -f -- "$archive"
+    [[ -z "$stage" || ! -d "$stage" ]] || rm -rf -- "$stage"
+}
+
+trap cleanup EXIT
+
+[[ "${EUID}" -eq 0 ]] || fail "must run as root through the restricted sudo rule"
+
+release_sha="${1:-}"
+[[ "$release_sha" =~ ^[0-9a-f]{40}$ ]] || fail "release must be a full Git commit SHA"
+
+for command_name in awk dd find flock gzip mktemp nginx systemctl tar; do
+    command -v "$command_name" >/dev/null 2>&1 || fail "missing required command: $command_name"
+done
+
+exec 9>"$LOCK_FILE"
+flock -n 9 || fail "another portal deployment is already running"
+
+install -d -m 0755 -o root -g root "$SITE_ROOT" "$RELEASES_DIR"
+archive="$(mktemp /run/service-portal.XXXXXX.tar.gz)"
+stage="$(mktemp -d "$RELEASES_DIR/.stage.$release_sha.XXXXXX")"
+
+log "receiving approved static artifact"
+dd of="$archive" bs=1M status=none
+gzip -t "$archive" || fail "artifact is not a valid gzip stream"
+
+if ! tar -tzf "$archive" | awk '
+    BEGIN { valid = 1; count = 0 }
+    {
+        count++
+        if ($0 ~ /^\// || $0 ~ /(^|\/)\.\.($|\/)/ || $0 ~ /\\/) valid = 0
+    }
+    END { exit !(valid && count > 0 && count <= 20) }
+'; then
+    fail "artifact contains unsafe or unexpected paths"
+fi
+
+tar -xzf "$archive" -C "$stage" --no-same-owner --no-same-permissions
+[[ -f "$stage/index.html" ]] || fail "artifact is missing index.html"
+[[ -f "$stage/styles.css" ]] || fail "artifact is missing styles.css"
+[[ -z "$(find "$stage" -type l -print -quit)" ]] || fail "symbolic links are not allowed"
+
+chmod -R u=rwX,go=rX "$stage"
+chown -R root:root "$stage"
+
+release_dir="$RELEASES_DIR/$release_sha"
+if [[ -d "$release_dir" ]]; then
+    rm -rf -- "$release_dir"
+fi
+mv -- "$stage" "$release_dir"
+stage=""
+
+ln -sfn "$release_dir" "$SITE_ROOT/current.next"
+mv -Tf -- "$SITE_ROOT/current.next" "$CURRENT_LINK"
+
+nginx -t
+systemctl reload nginx
+log "release $release_sha is live"

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+readonly source_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+readonly public_key_file="$source_dir/service_portal_github_actions.pub"
+
+[[ "${EUID}" -eq 0 ]] || {
+    printf 'Installation must run as root.\n' >&2
+    exit 1
+}
+
+for file in \
+    deploy-service-portal \
+    service-portal-deploy-entrypoint \
+    service-portal-deploy.sudoers \
+    nginx-service-portal.conf; do
+    [[ -f "$source_dir/$file" ]] || {
+        printf 'Missing installation input: %s\n' "$file" >&2
+        exit 1
+    }
+done
+
+[[ -f "$public_key_file" ]] || {
+    printf 'Missing deployment public key.\n' >&2
+    exit 1
+}
+
+install -o root -g root -m 0755 \
+    "$source_dir/deploy-service-portal" \
+    /usr/local/sbin/deploy-service-portal
+install -o root -g root -m 0755 \
+    "$source_dir/service-portal-deploy-entrypoint" \
+    /usr/local/sbin/service-portal-deploy-entrypoint
+install -o root -g root -m 0440 \
+    "$source_dir/service-portal-deploy.sudoers" \
+    /etc/sudoers.d/service-portal-deploy
+install -o root -g root -m 0644 \
+    "$source_dir/nginx-service-portal.conf" \
+    /etc/nginx/conf.d/service-portal.conf
+
+visudo -cf /etc/sudoers.d/service-portal-deploy
+
+install -d -o deploy -g deploy -m 0700 /home/deploy/.ssh
+touch /home/deploy/.ssh/authorized_keys
+public_key="$(cat "$public_key_file")"
+if ! grep -Fq "$public_key" /home/deploy/.ssh/authorized_keys; then
+    printf '%s %s\n' \
+        'restrict,command="/usr/local/sbin/service-portal-deploy-entrypoint"' \
+        "$public_key" \
+        >> /home/deploy/.ssh/authorized_keys
+fi
+chown deploy:deploy /home/deploy/.ssh/authorized_keys
+chmod 0600 /home/deploy/.ssh/authorized_keys
+
+nginx -t
+systemctl reload nginx
+
+printf 'Service Portal deployment surface installed.\n'

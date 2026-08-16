@@ -1,0 +1,20 @@
+# Service Portal
+
+A dependency-free static portal for the public services operated by YongShuaiJi.
+
+## Local development
+
+```bash
+npm run build
+npm run dev
+```
+
+The preview is available at `http://127.0.0.1:4173`.
+
+## Deployment
+
+Pushes to `main` build the static site and stream the approved artifact to the restricted
+production deploy key. Nginx serves the active release and terminates HTTPS.
+
+The service URLs are supplied by the GitHub Actions environment so they can move from the current
+IP endpoints to domain names without editing the page source.
