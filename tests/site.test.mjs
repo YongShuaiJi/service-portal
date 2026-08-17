@@ -21,6 +21,7 @@ test("page contains both public service destinations", () => {
 
 test("page includes responsive, accessible motion behavior", () => {
   assert.match(css, /@media \(max-width: 760px\)/);
+  assert.match(css, /@media \(prefers-color-scheme: dark\)/);
   assert.match(css, /prefers-reduced-motion/);
   assert.match(css, /:focus-visible/);
 });
