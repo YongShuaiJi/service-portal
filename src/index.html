@@ -3,78 +3,107 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f5f5f7" />
-    <meta name="description" content="纪永帅的工具空间：简洁、可靠、专注于解决真实问题。" />
-    <meta property="og:title" content="纪永帅的工具空间" />
-    <meta property="og:description" content="两个专注的工具，一个清晰的入口。" />
+    <meta name="theme-color" content="#0a0b0d" />
+    <meta name="description" content="永帅工具实验室：把重复的工作交给工具，把时间留给判断。" />
+    <meta property="og:title" content="永帅工具实验室" />
+    <meta property="og:description" content="为测试与工程团队打造的小而精的效率工具。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="%%PORTAL_URL%%" />
     <link rel="canonical" href="%%PORTAL_URL%%" />
     <link rel="stylesheet" href="./styles.css" />
-    <title>纪永帅的工具空间</title>
+    <title>永帅工具实验室 — 为真实工作流而造</title>
   </head>
   <body>
-    <div class="ambient ambient-one" aria-hidden="true"></div>
-    <div class="ambient ambient-two" aria-hidden="true"></div>
-
+    <div class="noise" aria-hidden="true"></div>
     <header class="site-header">
-      <a class="brand" href="%%PORTAL_URL%%" aria-label="返回工具空间首页">
-        <span class="brand-mark" aria-hidden="true">JY</span>
-        <span>工具空间</span>
+      <a class="brand" href="%%PORTAL_URL%%" aria-label="永帅工具实验室首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand-name">YONGSHUAI <b>LABS</b></span>
       </a>
-      <div class="availability" aria-label="两个服务均已上线">
-        <span class="status-dot" aria-hidden="true"></span>
-        2 个服务在线
-      </div>
+      <nav aria-label="主导航">
+        <a href="#products">产品</a><a href="#principles">理念</a>
+        <a class="nav-github" href="https://github.com/YongShuaiJi" rel="noreferrer">GitHub ↗</a>
+      </nav>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <p class="eyebrow">TOOLS, WITH INTENT.</p>
-        <h1 id="hero-title">让复杂的工作，<br /><span>回归简单。</span></h1>
-        <p class="hero-copy">
-          两个专注的工具，一个清晰的入口。选择你需要的服务，然后开始工作。
-        </p>
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> INDEPENDENT TOOL LAB · 2026</p>
+          <h1 id="hero-title">把时间留给<br /><em>真正的判断。</em></h1>
+          <p class="hero-intro">我们为测试与工程团队打造小而精的效率工具。少一点重复操作，多一点专注创造。</p>
+          <a class="hero-cta" href="#products">探索产品 <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="hero-console" aria-label="工具运行状态：两个产品均在线">
+          <div class="console-bar"><span>LAB / LIVE STATUS</span><span class="live-label"><i></i> ALL SYSTEMS ONLINE</span></div>
+          <div class="console-body">
+            <div class="orbit orbit-one"><span></span></div><div class="orbit orbit-two"><span></span></div>
+            <div class="orbit-core"><span>02</span><small>TOOLS<br />ONLINE</small></div>
+            <span class="axis axis-x"></span><span class="axis axis-y"></span>
+          </div>
+          <div class="console-log" aria-hidden="true"><span>XMIND_CONVERTER</span><b>READY</b><span>KAIRO_RUNTIME</span><b>READY</b></div>
+        </div>
       </section>
 
-      <section class="service-grid" aria-label="可用服务">
-        <a class="service-card xmind-card" href="%%XMIND_URL%%">
-          <div class="card-topline">
-            <span class="service-icon xmind-icon" aria-hidden="true">X</span>
-            <span class="service-state"><i aria-hidden="true"></i>在线</span>
-          </div>
-          <div class="card-content">
-            <p class="service-kicker">文档效率</p>
-            <h2>XMind 转测试用例</h2>
-            <p>将思维导图快速转换为结构清晰、可直接使用的测试用例，让整理工作更轻松。</p>
-          </div>
-          <div class="card-footer">
-            <span>打开服务</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </div>
-        </a>
+      <section class="products" id="products" aria-labelledby="products-title">
+        <div class="section-heading">
+          <div><p class="section-index">01 / PRODUCTS</p><h2 id="products-title">现在可用的工具</h2></div>
+          <p>从真实工作流里生长出来，<br />解决一个问题，并把它解决好。</p>
+        </div>
+        <div class="product-list">
+          <a class="product-card product-xmind" href="%%XMIND_URL%%">
+            <div class="product-number">01</div>
+            <div class="product-visual xmind-visual" aria-hidden="true">
+              <div class="node node-root">XMind</div><span class="connector connector-a"></span><span class="connector connector-b"></span><span class="connector connector-c"></span>
+              <div class="node node-a">模块</div><div class="node node-b">场景</div><div class="node node-c">步骤</div>
+              <div class="case-sheet"><i></i><i></i><i></i><i></i></div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta"><span>TEST PRODUCTIVITY</span><span class="online"><i></i> ONLINE</span></div>
+              <h3 aria-label="XMind 转测试用例">XMind <span aria-hidden="true">转测试用例</span></h3>
+              <p>导入思维导图，自动拆解层级关系，生成结构清晰、可直接执行的测试用例。</p>
+              <ul aria-label="产品特性"><li>保留导图层级</li><li>快速生成用例</li><li>减少重复整理</li></ul>
+              <span class="product-link">立即使用 <b aria-hidden="true">↗</b></span>
+            </div>
+          </a>
+          <a class="product-card product-kairo" href="%%KAIRO_URL%%">
+            <div class="product-number">02</div>
+            <div class="product-visual kairo-visual" aria-hidden="true">
+              <div class="code-window">
+                <div class="code-top"><i></i><i></i><i></i><span>KAIRO / RUNTIME</span></div>
+                <div class="code-lines"><p><b>01</b><span class="pink">inject</span> method.transform <em>{</em></p><p><b>02</b>&nbsp;&nbsp;target: <span class="blue">"JVM"</span>,</p><p><b>03</b>&nbsp;&nbsp;status: <span class="green">verified</span></p><p><b>04</b><em>}</em> <span class="cursor"></span></p></div>
+              </div>
+              <div class="runtime-badge"><span>●</span> LIVE PATCH</div>
+            </div>
+            <div class="product-info">
+              <div class="product-meta"><span>JVM ENGINEERING</span><span class="online"><i></i> ONLINE</span></div>
+              <h3><b>Kairo</b> <span>运行时增强</span></h3>
+              <p>面向 JVM 运行时的方法增强平台，让注入、验证、卸载与恢复形成可靠闭环。</p>
+              <ul aria-label="产品特性"><li>方法级增强</li><li>变更即时验证</li><li>安全卸载恢复</li></ul>
+              <span class="product-link">进入 Kairo <b aria-hidden="true">↗</b></span>
+            </div>
+          </a>
+        </div>
+      </section>
 
-        <a class="service-card kairo-card" href="%%KAIRO_URL%%">
-          <div class="card-topline">
-            <span class="service-icon kairo-icon" aria-hidden="true">K</span>
-            <span class="service-state"><i aria-hidden="true"></i>在线</span>
-          </div>
-          <div class="card-content">
-            <p class="service-kicker">JVM 工程</p>
-            <h2>Kairo</h2>
-            <p>面向 JVM 运行时的方法增强平台，提供注入、验证、卸载与恢复的完整工作流。</p>
-          </div>
-          <div class="card-footer">
-            <span>进入 Kairo</span>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </div>
-        </a>
+      <section class="principles" id="principles" aria-labelledby="principles-title">
+        <div class="principle-intro"><p class="section-index">02 / PRINCIPLES</p><h2 id="principles-title">工具不该增加<br />新的负担。</h2></div>
+        <div class="principle-grid">
+          <article><span>01</span><h3>问题优先</h3><p>不追求功能堆叠，只关注真实、高频且值得解决的问题。</p></article>
+          <article><span>02</span><h3>保持简单</h3><p>让路径更短、反馈更快，不需要说明书也能自然上手。</p></article>
+          <article><span>03</span><h3>可靠交付</h3><p>工具要经得住日常使用，也要让每一次操作都清晰可控。</p></article>
+        </div>
+      </section>
+
+      <section class="closing">
+        <p>READY WHEN YOU ARE.</p><h2>少做重复工作，<br /><span>现在就开始。</span></h2>
+        <div class="closing-actions"><a class="button button-primary" href="%%XMIND_URL%%">使用 XMind 转换器 ↗</a><a class="button button-secondary" href="%%KAIRO_URL%%">打开 Kairo ↗</a></div>
       </section>
     </main>
 
     <footer>
-      <p>为真实问题而构建，保持简单。</p>
-      <a href="https://github.com/YongShuaiJi" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <a class="brand footer-brand" href="%%PORTAL_URL%%"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-name">YONGSHUAI <b>LABS</b></span></a>
+      <p>BUILT FOR REAL WORK · © 2026</p><a href="https://github.com/YongShuaiJi" rel="noreferrer">GITHUB ↗</a>
     </footer>
   </body>
 </html>
