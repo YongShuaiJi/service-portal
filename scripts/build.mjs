@@ -6,9 +6,9 @@ const sourceDir = path.join(root, "src");
 const outputDir = path.join(root, "dist");
 
 const defaults = {
-  PORTAL_URL: "https://120.26.115.87/",
-  XMIND_URL: "https://120.26.115.87:18443/",
-  KAIRO_URL: "https://120.26.115.87:18380/",
+  PORTAL_URL: "https://yondavo.com/",
+  XMIND_URL: "https://xmind.yondavo.com/",
+  KAIRO_URL: "https://kairo.yondavo.com/",
 };
 
 function externalUrl(name) {

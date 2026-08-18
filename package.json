@@ -2,7 +2,7 @@
   "name": "service-portal",
   "version": "1.0.0",
   "private": true,
-  "description": "A lightweight public portal for YongShuaiJi services.",
+  "description": "A lightweight public portal for Yondavo products.",
   "type": "module",
   "engines": {
     "node": ">=22"

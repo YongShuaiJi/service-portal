@@ -15,6 +15,7 @@ for file in \
     service-portal-deploy-entrypoint \
     service-portal-deploy.sudoers \
     nginx-service-portal.conf \
+    nginx-kairo.conf \
     nginx-xmind-temporary-port.conf; do
     [[ -f "$source_dir/$file" ]] || {
         printf 'Missing installation input: %s\n' "$file" >&2
@@ -42,6 +43,9 @@ install -o root -g root -m 0644 \
 install -o root -g root -m 0644 \
     "$source_dir/nginx-xmind-temporary-port.conf" \
     /etc/nginx/conf.d/xmind-converter.conf
+install -o root -g root -m 0644 \
+    "$source_dir/nginx-kairo.conf" \
+    /etc/nginx/conf.d/kairo.conf
 
 visudo -cf /etc/sudoers.d/service-portal-deploy
 

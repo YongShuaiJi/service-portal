@@ -15,8 +15,14 @@ test("build resolves every deployment placeholder", () => {
 test("page contains both public service destinations", () => {
   assert.match(html, /XMind 转测试用例/);
   assert.match(html, />Kairo</);
-  assert.match(html, /https:\/\/120\.26\.115\.87:18443\//);
-  assert.match(html, /https:\/\/120\.26\.115\.87:18380\//);
+  assert.match(html, /https:\/\/xmind\.yondavo\.com\//);
+  assert.match(html, /https:\/\/kairo\.yondavo\.com\//);
+});
+
+test("page presents the Yondavo brand without a personal name", () => {
+  assert.match(html, /Yondavo — Make useful things\./);
+  assert.match(html, /做有用的东西。/);
+  assert.doesNotMatch(html, /永帅|YONGSHUAI|YongShuaiJi/);
 });
 
 test("page includes responsive, accessible motion behavior", () => {
