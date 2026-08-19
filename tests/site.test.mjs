@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
 import test from "node:test";
 
 execFileSync(process.execPath, ["scripts/build.mjs"], { stdio: "inherit" });
@@ -23,6 +23,15 @@ test("page presents the Yondavo brand without a personal name", () => {
   assert.match(html, /Yondavo — Make useful things\./);
   assert.match(html, /做有用的东西。/);
   assert.doesNotMatch(html, /永帅|YONGSHUAI|YongShuaiJi/);
+});
+
+test("page ships the Yondavo logo and browser icons", async () => {
+  assert.match(html, /assets\/yondavo-mark\.png/);
+  assert.match(html, /rel="icon"[^>]+assets\/favicon-32\.png/);
+  assert.match(html, /rel="apple-touch-icon"[^>]+assets\/apple-touch-icon\.png/);
+  for (const asset of ["yondavo-mark.png", "favicon-32.png", "icon-192.png", "apple-touch-icon.png"]) {
+    assert.ok((await stat(`dist/assets/${asset}`)).size > 0);
+  }
 });
 
 test("page includes responsive, accessible motion behavior", () => {

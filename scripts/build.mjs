@@ -39,5 +39,6 @@ if (/%%[A-Z_]+%%/.test(html)) {
 await writeFile(path.join(outputDir, "index.html"), html);
 await cp(path.join(sourceDir, "styles.css"), path.join(outputDir, "styles.css"));
 await cp(path.join(sourceDir, "robots.txt"), path.join(outputDir, "robots.txt"));
+await cp(path.join(sourceDir, "assets"), path.join(outputDir, "assets"), { recursive: true });
 
 console.log(`Built static portal in ${outputDir}`);

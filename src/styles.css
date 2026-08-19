@@ -92,13 +92,11 @@ footer {
 }
 
 .brand-mark {
-  display: flex;
+  display: grid;
   width: 38px;
   height: 38px;
-  gap: 3px;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 9px;
+  place-items: center;
+  padding: 5px;
   border: 1px solid rgba(255, 255, 255, 0.78);
   border-radius: 13px;
   background: linear-gradient(145deg, rgba(255,255,255,.92), rgba(226,231,255,.6));
@@ -106,10 +104,7 @@ footer {
   transform: rotate(-2deg);
 }
 
-.brand-mark i { display: block; width: 3px; border-radius: 3px; background: linear-gradient(#8299ff, #9a75f1); }
-.brand-mark i:nth-child(1) { height: 9px; }
-.brand-mark i:nth-child(2) { height: 18px; }
-.brand-mark i:nth-child(3) { height: 13px; }
+.brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .brand-name { color: #292d42; font-size: 11px; font-weight: 800; letter-spacing: .13em; }
 .brand-name b { color: #7d74dc; font-weight: 800; }
 
@@ -388,8 +383,7 @@ a:focus-visible { outline: 3px solid rgba(112,133,226,.38); outline-offset: 4px;
   }
 
   .site-header::after { background: linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent); }
-  .brand-mark { border-color: rgba(255,255,255,.08); border-radius: 3px; background: #d9ff43; box-shadow: 0 10px 28px rgba(0,0,0,.28); }
-  .brand-mark i { background: #0a0b0d; }
+  .brand-mark { border-color: rgba(255,255,255,.12); border-radius: 3px; background: rgba(255,255,255,.055); box-shadow: 0 10px 28px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.08); }
   .brand-name { color: #f4f2ea; }
   .brand-name b { color: #d9ff43; }
   nav a { color: #b9bbc1; }
